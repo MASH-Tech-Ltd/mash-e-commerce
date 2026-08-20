@@ -8,7 +8,8 @@ import { getTranslation, TranslationKeys } from '@/utils/translations';
 
 async function getTheme() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/themes/get-theme`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;
@@ -19,7 +20,8 @@ async function getTheme() {
 
 async function getProducts() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/products/get-all-product?limit=50&status=ACTIVE`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/products/get-all-product?limit=50&status=ACTIVE`, { cache: 'no-store' });
     if (!res.ok) return [];
     const json = await res.json();
     const data = json?.data?.data || json?.data || [];
@@ -31,7 +33,8 @@ async function getProducts() {
 
 async function getCategories() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/categories/get-all-category`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/categories/get-all-category`, { cache: 'no-store' });
     if (!res.ok) return [];
     const json = await res.json();
     const data = json?.data?.data || json?.data || [];

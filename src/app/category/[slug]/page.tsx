@@ -8,7 +8,8 @@ import Footer from '../../../components/layout/Footer';
 
 async function getCategories() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/categories/get-all-category`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/categories/get-all-category`, { cache: 'no-store' });
     if (!res.ok) return [];
     const json = await res.json();
     return json?.data?.data || json?.data || [];
@@ -28,7 +29,8 @@ async function getFilteredProducts(categoryId: string, searchParams: any) {
     if (searchParams.sort) query.set('sortBy', searchParams.sort);
     if (searchParams.brand) query.set('brand', searchParams.brand);
 
-    const res = await fetch(`http://localhost:8000/api/v1/products/get-all-product?${query.toString()}`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/products/get-all-product?${query.toString()}`, { cache: 'no-store' });
     if (!res.ok) return { data: [], meta: { total: 0, page: 1, totalPages: 1 } };
     const json = await res.json();
     return json || { data: [], meta: { total: 0, page: 1, totalPages: 1 } };

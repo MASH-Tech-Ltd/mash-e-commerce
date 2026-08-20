@@ -5,7 +5,8 @@ import { Laptop, Cpu, Smartphone, Speaker, Wind, Tv, Gamepad2, Printer, Camera, 
 
 async function getCategories(tenantSlug: string) {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/categories/get-all-category`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/categories/get-all-category`, { cache: 'no-store' });
     if (!res.ok) return [];
     const json = await res.json();
     const data = json?.data?.data || json?.data || [];

@@ -10,7 +10,8 @@ const notoSansBengali = Noto_Sans_Bengali({ weight: ['400', '500', '600', '700',
 
 async function getTheme() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/themes/get-theme`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;

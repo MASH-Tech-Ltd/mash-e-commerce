@@ -84,7 +84,8 @@ export default function CheckoutClient() {
         paymentStatus: 'unpaid'
       };
 
-      const res = await fetch('http://localhost:8000/api/v1/orders/create-order', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+      const res = await fetch(`${apiUrl}/orders/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

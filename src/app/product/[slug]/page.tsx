@@ -7,7 +7,8 @@ import { getTranslation, TranslationKeys } from '@/utils/translations';
 
 async function getTheme() {
   try {
-    const res = await fetch(`http://localhost:8000/api/v1/themes/get-theme`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;
@@ -19,7 +20,8 @@ async function getTheme() {
 async function getProduct(productSlug: string) {
   try {
     // Try by slug first, then by ID
-    const res = await fetch(`http://localhost:8000/api/v1/products/get-product/${productSlug}`, { cache: 'no-store' });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+    const res = await fetch(`${apiUrl}/products/get-product/${productSlug}`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data || null;

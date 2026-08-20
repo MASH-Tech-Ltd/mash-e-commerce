@@ -45,7 +45,8 @@ export default function GlobalSearch() {
       setIsOpen(true);
       
       try {
-        const res = await fetch(`http://localhost:8000/api/v1/products/get-all-product?search=${encodeURIComponent(query)}&limit=10`);
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+        const res = await fetch(`${apiUrl}/products/get-all-product?search=${encodeURIComponent(query)}&limit=10`);
         const json = await res.json();
         if (json.data && json.data.data) {
           setResults(json.data.data);
