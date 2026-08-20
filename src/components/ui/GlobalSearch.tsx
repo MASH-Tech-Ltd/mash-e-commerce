@@ -48,9 +48,8 @@ export default function GlobalSearch() {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
         const res = await fetch(`${apiUrl}/products/get-all-product?search=${encodeURIComponent(query)}&limit=10`);
         const json = await res.json();
-        if (json.data && json.data.data) {
-          setResults(json.data.data);
-        }
+        const responseData = json?.data?.data || json?.data || [];
+        setResults(Array.isArray(responseData) ? responseData : []);
       } catch (error) {
         console.error("Search failed", error);
       } finally {
@@ -58,9 +57,16 @@ export default function GlobalSearch() {
       }
     };
 
-    const debounceTimer = setTimeout(searchProducts, 300);
+    const debounceTimer = setTimeout(searchProducts, 1000); // request delay 1s
     return () => clearTimeout(debounceTimer);
   }, [query]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && query.trim()) {
+      setIsOpen(false);
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
 
   return (
     <div ref={wrapperRef} className="relative flex-1 max-w-2xl mx-8">
@@ -72,6 +78,7 @@ export default function GlobalSearch() {
           onFocus={() => {
             if (query.trim()) setIsOpen(true);
           }}
+          onKeyDown={handleKeyDown}
           placeholder="Search for products..."
           className="w-full h-11 pl-11 pr-4 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
         />

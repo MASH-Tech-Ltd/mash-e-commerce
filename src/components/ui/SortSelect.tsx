@@ -13,25 +13,24 @@ export default function SortSelect() {
     const newSort = e.target.value;
     const params = new URLSearchParams(searchParams.toString());
     params.set('sort', newSort);
-    params.set('page', '1'); // Reset to page 1 on sort
+    params.set('page', '1');
     router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <label htmlFor="sort" className="text-sm font-medium text-gray-500 whitespace-nowrap">Sort By:</label>
+    <div className="flex items-center gap-1">
+      <label htmlFor="sort" className="text-xs font-medium text-gray-500 whitespace-nowrap hidden sm:block">Sort:</label>
       <select
         id="sort"
         value={currentSort}
         onChange={handleSortChange}
-        className="border border-gray-200 rounded-md py-1.5 px-3 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent outline-none cursor-pointer"
+        className="border border-gray-300 rounded-md bg-transparent py-1 pr-6 pl-2 text-xs font-medium text-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-400 cursor-pointer appearance-auto"
       >
-        <option value="customized">Customized</option>
-        <option value="brand">By Brand</option>
-        <option value="newest">Display newest items first</option>
-        <option value="price_asc">Low to High (Price)</option>
-        <option value="price_desc">High to Low (Price)</option>
-        <option value="discount_desc">High to Low (Discount)</option>
+        <option value="newest">Newest</option>
+        <option value="price_asc">Price ↑</option>
+        <option value="price_desc">Price ↓</option>
+        <option value="discount_desc">Discount ↓</option>
+        <option value="brand">Brand</option>
       </select>
     </div>
   );

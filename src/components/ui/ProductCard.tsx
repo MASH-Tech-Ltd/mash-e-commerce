@@ -90,7 +90,7 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
   return (
     <Link
       href={`/product/${productSlug}`}
-      className={`group flex bg-white rounded-md shadow-sm border border-gray-100 hover:shadow-md transition-shadow overflow-hidden relative ${isList ? "flex-row" : "flex-col"}`}
+      className={`group flex bg-white rounded-md shadow-sm border border-gray-100 hover:shadow-md transition-shadow overflow-hidden relative h-full ${isList ? "flex-row" : "flex-col"}`}
     >
       {/* Image Container */}
       <div
@@ -125,7 +125,13 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
         className={`p-4 flex flex-col flex-1 ${isList ? "justify-center" : ""}`}
       >
         <h4
-          className={`text-[13px] text-gray-800 leading-snug mb-3 group-hover:text-primary transition-colors ${isList ? "text-lg font-semibold" : "line-clamp-2 min-h-[36px]"}`}
+          className={`text-[13px] text-gray-800 leading-snug mb-3 group-hover:text-primary transition-colors select-text ${isList ? "text-lg font-semibold" : "line-clamp-2 min-h-[36px]"}`}
+          onClick={(e) => {
+            // Check if user is selecting text
+            if (window.getSelection()?.toString().length) {
+              e.preventDefault();
+            }
+          }}
         >
           {product.title}
         </h4>
