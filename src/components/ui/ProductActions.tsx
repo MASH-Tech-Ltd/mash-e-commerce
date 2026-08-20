@@ -33,9 +33,10 @@ export default function ProductActions({ product }: ProductActionsProps) {
   const handleAddToCart = () => {
     addToCart({
       id: String(productId),
+      productId: String(productId),
       title: product.title,
       price: product.discountedPrice,
-      image: typeof product.image === 'string' ? product.image : product.image?.secure_url,
+      image: (typeof product.image === 'string' ? product.image : product.image?.secure_url) || '',
       tenantId: product.tenantId
     }, quantity);
   };
