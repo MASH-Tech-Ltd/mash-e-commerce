@@ -38,6 +38,8 @@ export type TranslationKeys =
   | 'fullName'
   | 'address'
   | 'selectDivision'
+  | 'selectDistrict'
+  | 'selectUpazila'
   | 'paymentOptions'
   | 'cashOnDelivery'
   | 'addMoreItems'
@@ -56,7 +58,15 @@ export type TranslationKeys =
   | 'items'
   | 'continueShopping'
   | 'orderConfirmed'
-  | 'thankYouPurchase';
+  | 'thankYouPurchase'
+  | 'errorRequiredPhone'
+  | 'errorInvalidPhone'
+  | 'errorRequiredName'
+  | 'errorRequiredAddress'
+  | 'errorRequiredDivision'
+  | 'errorRequiredDistrict'
+  | 'errorRequiredUpazila'
+  | 'agreeToTerms';
 
 export const translations: Record<Language, Record<TranslationKeys, string>> = {
   en: {
@@ -97,6 +107,8 @@ export const translations: Record<Language, Record<TranslationKeys, string>> = {
     fullName: 'Full Name *',
     address: 'Address *',
     selectDivision: 'Select division',
+    selectDistrict: 'Select district',
+    selectUpazila: 'Select upazila/sub-district',
     paymentOptions: 'Payment options',
     cashOnDelivery: 'Cash On Delivery',
     addMoreItems: 'Add more items',
@@ -115,7 +127,15 @@ export const translations: Record<Language, Record<TranslationKeys, string>> = {
     items: 'items',
     continueShopping: 'Continue Shopping',
     orderConfirmed: 'Order Confirmed!',
-    thankYouPurchase: "Thank you for your purchase. We've received your order and will process it shortly."
+    thankYouPurchase: "Thank you for your purchase. We've received your order and will process it shortly.",
+    errorRequiredPhone: 'Phone number is required',
+    errorInvalidPhone: 'Please enter a valid Bangladeshi phone number',
+    errorRequiredName: 'Full name is required',
+    errorRequiredAddress: 'Detailed address is required',
+    errorRequiredDivision: 'Please select a division',
+    errorRequiredDistrict: 'Please select a district',
+    errorRequiredUpazila: 'Please select an upazila',
+    agreeToTerms: 'I agree to the Terms and Conditions and Return Policy'
   },
   bn: {
     addToCart: 'কার্টে যোগ করুন',
@@ -155,6 +175,8 @@ export const translations: Record<Language, Record<TranslationKeys, string>> = {
     fullName: 'পুরো নাম *',
     address: 'ঠিকানা *',
     selectDivision: 'বিভাগ নির্বাচন করুন',
+    selectDistrict: 'জেলা নির্বাচন করুন',
+    selectUpazila: 'উপজেলা/থানা নির্বাচন করুন',
     paymentOptions: 'পেমেন্ট অপশন',
     cashOnDelivery: 'ক্যাশ অন ডেলিভারি',
     addMoreItems: 'আরও আইটেম যোগ করুন',
@@ -173,7 +195,15 @@ export const translations: Record<Language, Record<TranslationKeys, string>> = {
     items: 'আইটেম',
     continueShopping: 'কেনাকাটা চালিয়ে যান',
     orderConfirmed: 'অর্ডার কনফার্ম হয়েছে!',
-    thankYouPurchase: "আপনার ক্রয়ের জন্য ধন্যবাদ। আমরা আপনার অর্ডার পেয়েছি এবং শীঘ্রই এটি প্রক্রিয়া করব।"
+    thankYouPurchase: "আপনার ক্রয়ের জন্য ধন্যবাদ। আমরা আপনার অর্ডার পেয়েছি এবং শীঘ্রই এটি প্রক্রিয়া করব।",
+    errorRequiredPhone: 'ফোন নম্বর প্রদান করা আবশ্যক',
+    errorInvalidPhone: 'অনুগ্রহ করে একটি বৈধ বাংলাদেশী ফোন নম্বর দিন',
+    errorRequiredName: 'পুরো নাম প্রদান করা আবশ্যক',
+    errorRequiredAddress: 'বিস্তারিত ঠিকানা প্রদান করা আবশ্যক',
+    errorRequiredDivision: 'অনুগ্রহ করে একটি বিভাগ নির্বাচন করুন',
+    errorRequiredDistrict: 'অনুগ্রহ করে একটি জেলা নির্বাচন করুন',
+    errorRequiredUpazila: 'অনুগ্রহ করে একটি উপজেলা নির্বাচন করুন',
+    agreeToTerms: 'আমি শর্তাবলী এবং রিটার্ন পলিসির সাথে একমত'
   }
 };
 

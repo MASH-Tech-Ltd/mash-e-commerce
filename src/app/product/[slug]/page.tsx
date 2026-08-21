@@ -245,7 +245,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Footer */}
       <footer className="border-t border-gray-100 py-12 mt-20 bg-white">
         <div className="max-w-[1400px] mx-auto px-6 text-center text-gray-500 text-sm font-medium">
-          <p>&copy; {new Date().getFullYear()} ELECTRONICS STORE. All rights reserved.</p>
+          <p>{theme?.footer?.copyrightText || `© ${new Date().getFullYear()} ${theme?.storeInfo?.name?.toUpperCase() || 'ELECTRONICS STORE'}. All rights reserved.`}</p>
         </div>
       </footer>
     </div>

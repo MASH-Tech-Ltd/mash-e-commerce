@@ -11,6 +11,7 @@ export default async function Header() {
         {/* Top Row on Mobile: Logo + Mobile Nav */}
         <div className="flex justify-between items-center w-full md:w-auto">
           <Link href="/" className="flex items-center gap-3">
+            <img src="/MEasy.png" alt="Logo" className="w-8 h-8 object-contain" />
             <h1 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 uppercase">
               Electronics Store
             </h1>

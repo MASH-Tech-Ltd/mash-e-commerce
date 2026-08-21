@@ -49,11 +49,14 @@ export default async function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
           {/* Logo and Social */}
           <div className="col-span-2 md:col-span-1 flex flex-row items-center justify-between w-full md:flex-col md:items-start md:justify-start md:space-y-4 md:space-x-0 space-x-4">
-            <div className="h-12 flex items-center justify-start shrink-0">
+            <div className="h-12 flex items-center justify-start shrink-0 gap-3">
                {storeInfo?.logo ? (
                  <img src={storeInfo.logo} alt={storeInfo.name} className="max-h-12 object-contain rounded-sm" />
                ) : (
-                 <span className="font-black text-xl text-gray-900">{storeInfo?.name || 'ELECTRONICS STORE'}</span>
+                 <>
+                   <img src="/MEasy.png" alt="Logo" className="w-8 h-8 object-contain" />
+                   <span className="font-black text-xl text-gray-900">{storeInfo?.name || 'ELECTRONICS STORE'}</span>
+                 </>
                )}
             </div>
             

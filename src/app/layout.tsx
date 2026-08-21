@@ -24,6 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Electronics Store',
     description: 'Shop the latest electronics',
+    icons: {
+      icon: '/MEasy.png',
+    }
   };
 }
 
