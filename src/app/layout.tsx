@@ -107,6 +107,7 @@ export default async function RootLayout({
           
           body {
             font-family: var(--font-sans) !important;
+            overflow-x: hidden;
           }
           
           .bg-primary { background-color: var(--primary-color) !important; color: var(--primary-foreground) !important; }
@@ -122,6 +123,20 @@ export default async function RootLayout({
           /* Override specific tailwind text-white classes on primary backgrounds */
           .bg-primary.text-white, .hover\\:bg-primary:hover.text-white, .hover\\:bg-primary:hover.hover\\:text-white:hover { 
             color: var(--primary-foreground) !important; 
+          }
+
+          /* Hide browser scrollbar everywhere */
+          html, body {
+            overflow-x: hidden;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+          }
+          html::-webkit-scrollbar,
+          body::-webkit-scrollbar,
+          *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
           }
         `}} />
         <LanguageProvider initialLanguage={language}>
