@@ -119,7 +119,9 @@ export default function GlobalSearch() {
                       <div className="text-xs text-gray-500">{product.brand || 'Generic'}</div>
                     </div>
                     <div className="text-sm font-bold text-primary">
-                      Tk {product.discountedPrice?.toLocaleString()}
+                      Tk {(product.variants && product.variants.length > 0 
+                        ? product.variants[0].discountedPrice 
+                        : product.discountedPrice)?.toLocaleString() || 0}
                     </div>
                   </Link>
                 ))}

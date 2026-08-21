@@ -9,7 +9,7 @@ import { getTranslation, TranslationKeys } from '@/utils/translations';
 async function getTheme() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { next: { revalidate: 30 } });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;
@@ -21,7 +21,7 @@ async function getTheme() {
 async function getProducts() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/products/get-all-product?limit=50&status=ACTIVE`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/products/get-all-product?limit=50&status=ACTIVE`, { next: { revalidate: 30 } });
     if (!res.ok) return [];
     const json = await res.json();
     const data = json?.data?.data || json?.data || [];
@@ -34,7 +34,7 @@ async function getProducts() {
 async function getCategories() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/categories/get-all-category`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/categories/get-all-category`, { next: { revalidate: 30 } });
     if (!res.ok) return [];
     const json = await res.json();
     const data = json?.data?.data || json?.data || [];
@@ -70,6 +70,25 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
+      {/* Banners */}
+      {theme?.banners && theme.banners.length > 0 && (
+        <div className="w-full bg-white pt-6 pb-2">
+          <div className="max-w-[1400px] mx-auto px-6">
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {theme.banners.map((banner: any, idx: number) => (
+                <div key={idx} className="snap-center flex-shrink-0 w-full aspect-[1200/400] md:aspect-[1200/250] rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50">
+                  <img 
+                    src={banner.secure_url} 
+                    alt={`Banner ${idx + 1}`} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Categories */}
       {categories.length > 0 && (
         <div className="bg-white border-b border-gray-100 shadow-sm">

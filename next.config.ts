@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  compress: false, // Disables gzip to fix the MaxListenersExceededWarning memory leak in dev
 };
 
 export default nextConfig;

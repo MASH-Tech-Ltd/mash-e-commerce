@@ -5,7 +5,7 @@ import { getTranslation, TranslationKeys } from '@/utils/translations';
 async function getTheme() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { next: { revalidate: 30 } });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;

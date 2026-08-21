@@ -217,6 +217,9 @@ export default function CheckoutClient() {
         customerName: fullName,
         customerPhone: phone,
         shippingAddress: `${address}, ${upazila}, ${district}, ${division}`,
+        division,
+        district,
+        upazila,
         note: deliveryNote,
         items: cartItems.map((item) => ({
           productId: item.productId || item.id,

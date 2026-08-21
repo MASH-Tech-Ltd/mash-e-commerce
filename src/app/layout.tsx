@@ -11,7 +11,7 @@ const notoSansBengali = Noto_Sans_Bengali({ weight: ['400', '500', '600', '700',
 async function getTheme() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { next: { revalidate: 30 } });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;
@@ -21,11 +21,15 @@ async function getTheme() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const theme = await getTheme();
+  const storeName = theme?.storeInfo?.name || 'Electronics Store';
+  const logo = theme?.storeInfo?.logo || '/MEasy.png';
+
   return {
-    title: 'Electronics Store',
+    title: storeName,
     description: 'Shop the latest electronics',
     icons: {
-      icon: '/MEasy.png',
+      icon: logo,
     }
   };
 }
