@@ -21,7 +21,12 @@ interface ProductProps {
     shortDescription?: string;
     tenantId: string;
     productType?: string;
-    variants?: Array<{ variantName: string; originalPrice: number; discountedPrice: number; stock: number }>;
+    variants?: Array<{
+      variantName: string;
+      originalPrice: number;
+      discountedPrice: number;
+      stock: number;
+    }>;
   };
   isList?: boolean;
 }
@@ -45,9 +50,16 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
   }
 
   // For variant products, use the first variant's price as the display price
-  const isVariant = product.productType === 'VARIANT' && product.variants && product.variants.length > 0;
-  const displayOriginalPrice = isVariant ? product.variants![0].originalPrice : product.originalPrice;
-  const displayDiscountedPrice = isVariant ? product.variants![0].discountedPrice : product.discountedPrice;
+  const isVariant =
+    product.productType === "VARIANT" &&
+    product.variants &&
+    product.variants.length > 0;
+  const displayOriginalPrice = isVariant
+    ? product.variants![0].originalPrice
+    : product.originalPrice;
+  const displayDiscountedPrice = isVariant
+    ? product.variants![0].discountedPrice
+    : product.discountedPrice;
 
   const savePercent =
     displayOriginalPrice > 0
@@ -94,17 +106,17 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
     >
       {/* Image Container */}
       <div
-        className={`relative bg-[#F8F9FA] flex items-center justify-center overflow-hidden shrink-0 ${isList ? "w-48 h-48" : "aspect-square w-full"}`}
+        className={`relative bg-[#F8F9FA] flex items-center justify-center overflow-hidden shrink-0 ${isList ? "w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48" : "aspect-square w-full"}`}
       >
         {(savePercent > 0 ||
           (product.saveAmount && product.saveAmount > 0)) && (
-          <div className="absolute top-0 left-0 bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-br-lg z-10 shadow-sm">
-            {t('save')}:{" "}
+          <div className="absolute top-0 left-0 bg-primary text-white text-[10px] sm:text-[11px] font-bold px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-br-lg z-10 shadow-sm">
+            {t("save")}:{" "}
             {(
               product.saveAmount ||
               displayOriginalPrice - displayDiscountedPrice
-            ).toLocaleString()}
-            {" "}{t('bdt')} (-{savePercent}%)
+            ).toLocaleString()}{" "}
+            {t("bdt")} (-{savePercent}%)
           </div>
         )}
         {imageUrl ? (
@@ -122,10 +134,10 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
 
       {/* Details */}
       <div
-        className={`p-4 flex flex-col flex-1 ${isList ? "justify-center" : ""}`}
+        className={`flex flex-col flex-1 ${isList ? "p-2.5 sm:p-4 justify-center" : "p-4"}`}
       >
         <h4
-          className={`text-[13px] text-gray-800 leading-snug mb-3 group-hover:text-primary transition-colors select-text ${isList ? "text-lg font-semibold" : "line-clamp-2 min-h-[36px]"}`}
+          className={`text-gray-800 leading-snug mb-2 sm:mb-3 group-hover:text-primary transition-colors select-text ${isList ? "text-sm sm:text-base md:text-lg font-semibold" : "text-[13px] line-clamp-2 min-h-[36px]"}`}
           onClick={(e) => {
             // Check if user is selecting text
             if (window.getSelection()?.toString().length) {
@@ -137,41 +149,41 @@ export default function ProductCard({ product, isList = false }: ProductProps) {
         </h4>
 
         {isList && product.shortDescription && (
-          <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+          <p className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-4 line-clamp-2">
             {product.shortDescription}
           </p>
         )}
 
-        <div className="flex items-baseline gap-2 mb-4">
+        <div className="flex items-baseline gap-2 mb-2 sm:mb-4">
           <span
-            className={`font-bold text-[#D3100B] ${isList ? "text-xl" : "text-[15px]"}`}
+            className={`font-bold text-[#D3100B] ${isList ? "text-base sm:text-lg md:text-xl" : "text-[15px]"}`}
           >
-            {displayDiscountedPrice.toLocaleString()} {t('bdt')}
+            {displayDiscountedPrice.toLocaleString()} {t("bdt")}
           </span>
           {displayOriginalPrice > displayDiscountedPrice && (
             <span className="text-[12px] text-gray-500 line-through">
-              {displayOriginalPrice.toLocaleString()} {t('bdt')}
+              {displayOriginalPrice.toLocaleString()} {t("bdt")}
             </span>
           )}
         </div>
 
         {/* Action Buttons */}
         <div
-          className={`mt-auto flex ${isList ? "flex-row gap-3 w-64" : "flex-col gap-2"}`}
+          className={`mt-auto flex ${isList ? "flex-col sm:flex-row gap-1.5 sm:gap-3 sm:w-64" : "flex-col gap-2"}`}
         >
           <button
             onClick={handleAddToCart}
             className="w-full flex items-center justify-center space-x-2 py-1.5 border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors"
           >
             <ShoppingCart size={14} />
-            <span className="text-xs font-semibold">{t('addToCart')}</span>
+            <span className="text-xs font-semibold">{t("addToCart")}</span>
           </button>
           <button
             onClick={handleBuyNow}
             className="w-full flex items-center justify-center space-x-2 py-1.5 bg-primary text-white rounded hover:bg-primary transition-colors shadow-sm"
           >
             <Zap size={14} />
-            <span className="text-xs font-semibold">{t('buyNow')}</span>
+            <span className="text-xs font-semibold">{t("buyNow")}</span>
           </button>
         </div>
       </div>
