@@ -28,7 +28,7 @@ export default function SettingsPage() {
 
   const fetchStoreInfo = async () => {
     try {
-      const res = await api.get('/tenants/my-store');
+      const res = await api.get('/store/my-store');
       if (res.data.status === 'ok' || res.data.success) {
         setFormData({
           name: res.data.data.name || '',
@@ -63,7 +63,7 @@ export default function SettingsPage() {
       // In a real application, you would handle Cloudinary upload for the logo here
       // For this implementation, we will just send the updated name
       
-      const res = await api.patch('/tenants/update-store', payload);
+      const res = await api.patch('/store/update-store', payload);
       if (res.data.status === 'ok' || res.data.success) {
         toast.success('Store settings updated successfully!');
         

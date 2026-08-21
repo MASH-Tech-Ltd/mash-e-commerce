@@ -52,15 +52,25 @@ export default function CheckoutClient() {
         .min(1, { message: t("errorRequiredDistrict") as string }),
       upazila: z.string().optional().or(z.literal("")),
     });
-  const [status, setStatus] = useState<"idle" | "processing" | "success">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "processing" | "success">("idle");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [mounted, setMounted] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [checkoutNote, setCheckoutNote] = useState<string>("");
 
   React.useEffect(() => {
     setMounted(true);
+    const fetchStore = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+        const res = await fetch(`${apiUrl}/store/my-store`);
+        const json = await res.json();
+        if (json.data?.settings?.checkoutNote) {
+          setCheckoutNote(json.data.settings.checkoutNote);
+        }
+      } catch (err) {}
+    };
+    fetchStore();
   }, []);
 
   // Mock form state
@@ -518,7 +528,11 @@ export default function CheckoutClient() {
                 </div>
               </div>
 
-              {/* Note: removed dynamic storeInfo.settings.checkoutNote logic for single store */}
+              {checkoutNote && (
+                <p className="mt-2 text-xs text-gray-500 italic bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  {checkoutNote}
+                </p>
+              )}
             </section>
           </div>
 

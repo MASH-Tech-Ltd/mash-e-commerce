@@ -5,7 +5,7 @@ import { getTranslation, TranslationKeys } from '@/utils/translations';
 async function getTheme() {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-    const res = await fetch(`${apiUrl}/themes/get-theme`, { next: { revalidate: 60 } });
+    const res = await fetch(`${apiUrl}/themes/get-theme`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data;
@@ -40,7 +40,7 @@ export default async function Footer() {
     termsAndConditions: footerSettings.policies?.termsAndConditions || '',
     returnPolicy: footerSettings.policies?.returnPolicy || ''
   };
-  const copyrightText = footerSettings.copyrightText || `© ${new Date().getFullYear()} - Copyright ${storeInfo?.name?.toUpperCase() || 'ELECTRONICS STORE'}`;
+  const copyrightText = `© ${new Date().getFullYear()} ${storeInfo?.name?.toUpperCase() || 'ELECTRONICS STORE'}. All rights reserved.`;
 
 
   return (
@@ -127,7 +127,7 @@ export default async function Footer() {
         
         <div className="border-t border-gray-100 pt-6 text-center flex flex-col items-center gap-1">
           <p className="text-xs text-gray-400">{copyrightText}</p>
-          <p className="text-[10px] font-semibold text-gray-400 tracking-widest uppercase">A Product Of MASH TECH</p>
+          <p className="text-[10px] font-semibold text-gray-400 tracking-widest uppercase">Developed by <a href="https://mash-tech-ltd.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">MASH TECH</a></p>
         </div>
       </div>
     </footer>

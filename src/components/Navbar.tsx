@@ -9,7 +9,7 @@ export default function Navbar() {
 
   const fetchStoreName = async () => {
     try {
-      const res = await api.get('/tenants/my-store');
+      const res = await api.get('/store/my-store');
       if (res.data.status === 'ok' || res.data.success) {
         if (res.data.data.name) {
           setStoreName(res.data.data.name);

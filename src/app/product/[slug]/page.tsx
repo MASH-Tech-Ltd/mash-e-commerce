@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import BackButtonHistory from '@/components/ui/BackButtonHistory';
 import ProductGallery from '@/components/ProductGallery';
 import ProductActionClient from './ProductActionClient';
+import Footer from '@/components/layout/Footer';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { getTranslation, TranslationKeys } from '@/utils/translations';
 
@@ -243,11 +244,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-12 mt-20 bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 text-center text-gray-500 text-sm font-medium">
-          <p>{theme?.footer?.copyrightText || `© ${new Date().getFullYear()} ${theme?.storeInfo?.name?.toUpperCase() || 'ELECTRONICS STORE'}. All rights reserved.`}</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
